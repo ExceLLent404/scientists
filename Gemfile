@@ -1,0 +1,10 @@
+source 'https://rubygems.org'
+
+gem 'sinatra'
+gem 'puma'
+gem 'sequel'
+gem 'pg'
+gem 'json'
+gem 'rerun'
+gem 'rack-test'
+gem 'rspec'

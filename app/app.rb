@@ -111,3 +111,26 @@ post '/api/devices/:id/scientists' do
   device.add_scientist(scientist)
   return 201
 end
+
+put '/api/scientists/:id' do
+  scientist = Scientist.first(id: params[:id])
+  halt 404 if scientist.nil?
+
+  data = JSON.parse(request.body.read)
+  halt 422 until is_correct_data?(data, "name", "madness", "tries")
+
+  scientist.update(name: data["name"],
+    madness: data["madness"], tries: data["tries"])
+  return 204
+end
+
+put '/api/devices/:id' do
+  device = Device.first(id: params[:id])
+  halt 404 if device.nil?
+
+  data = JSON.parse(request.body.read)
+  halt 422 until is_correct_data?(data, "name", "power")
+
+  device.update(name: data["name"], power: data["power"])
+  return 204
+end

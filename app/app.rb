@@ -134,3 +134,33 @@ put '/api/devices/:id' do
   device.update(name: data["name"], power: data["power"])
   return 204
 end
+
+delete '/api/scientists/:id' do
+  scientist = Scientist.first(id: params[:id])
+  scientist.delete if !scientist.nil?
+  return 204
+end
+
+delete '/api/devices/:id' do
+  device = Device.first(id: params[:id])
+  device.delete if !device.nil?
+  return 204
+end
+
+delete '/api/scientists/:scientist_id/devices/:device_id' do
+  scientist = Scientist.first(id: params[:scientist_id])
+  return 204 if scientist.nil?
+
+  device = scientist.devices_dataset.first(id: params[:device_id])
+  scientist.remove_device(device) if !device.nil?
+  return 204
+end
+
+delete '/api/devices/:device_id/scientists/:scientist_id' do
+  device = Device.first(id: params[:device_id])
+  return 204 if device.nil?
+
+  scientist = device.scientists_dataset.first(id: params[:scientist_id])
+  device.remove_scientist(scientist) if !scientist.nil?
+  return 204
+end

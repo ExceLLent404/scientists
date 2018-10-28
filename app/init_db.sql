@@ -27,24 +27,3 @@ CREATE TABLE copyrights (
 	device_id int NOT NULL REFERENCES devices ON DELETE CASCADE,
 	PRIMARY KEY (scientist_id, device_id)
 );
-
--- Filling tables with initial values
-
-INSERT INTO scientists (id, name, madness, tries) VALUES
-(1, 'James Watt', 50, 1),
-(2, 'Thomas Edison', 73, 4),
-(3, 'Charles Babbage', 20, 0),
-(4, 'Alan Turing', 88, 3);
-
-INSERT INTO devices (id, name, power) VALUES
-(1, 'Steam engine', 90),
-(2, 'Incandescent lamp', 20),
-(3, 'Phonograph', 15),
-(4, 'Computer', 100);
-
-INSERT INTO copyrights (scientist_id, device_id) VALUES
-(1, 1),
-(2, 2),
-(2, 3),
-(3, 4),
-(4, 4);

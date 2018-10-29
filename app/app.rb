@@ -30,10 +30,6 @@ get '/api/scientists/:id/devices' do
   return 200, {'Content-Type' => 'application/json'}, response_body
 end
 
-get '/api/scientists/:s_id/devices/:d_id' do
-  redirect to("/api/devices/#{params[:d_id]}")
-end
-
 get '/api/devices' do
   devices = Device.all
   devices_list = []
@@ -57,10 +53,6 @@ get '/api/devices/:id/scientists' do
   scientists.each { |s| scientists_list << s.values}
   response_body = JSON.pretty_generate({scientists: scientists_list})
   return 200, {'Content-Type' => 'application/json'}, response_body
-end
-
-get '/api/devices/:d_id/scientists/:s_id' do
-  redirect to("/api/scientists/#{params[:d_id]}")
 end
 
 post '/api/scientists' do

@@ -59,9 +59,9 @@ post '/api/scientists' do
   data = JSON.parse(request.body.read)
   halt 422 until is_correct_data?(data, "name", "madness", "tries")
 
-  Scientist.create(name: data["name"],
-    madness: data["madness"], tries: data["tries"])
-  return 201
+  scientist = Scientist.create(name: data["name"],
+                               madness: data["madness"], tries: data["tries"])
+  return 201, {"Location" => "/api/scientists/#{scientist.id}"}, ""
 end
 
 post '/api/scientists/:id/devices' do
@@ -82,8 +82,8 @@ post '/api/devices' do
   data = JSON.parse(request.body.read)
   halt 422 until is_correct_data?(data, "name", "power")
 
-  Device.create(name: data["name"], power: data["power"])
-  return 201
+  device = Device.create(name: data["name"], power: data["power"])
+  return 201, {"Location" => "/api/devices/#{device.id}"}, ""
 end
 
 post '/api/devices/:id/scientists' do

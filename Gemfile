@@ -9,3 +9,5 @@ gem 'rerun'
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 gem 'rack-test'
 gem 'rspec'
+gem 'database_cleaner'
+gem 'rspec-json_matcher'

@@ -14,14 +14,14 @@ get '/api/scientists' do
 end
 
 get '/api/scientists/:id' do
-  scientist = Scientist.first(id: params[:id])
+  scientist = Scientist[params[:id]]
   halt 404 if scientist.nil?
   response_body = JSON.pretty_generate(scientist.values)
   return 200, {'Content-Type' => 'application/json'}, response_body
 end
 
 get '/api/scientists/:id/devices' do
-  scientist = Scientist.first(id: params[:id])
+  scientist = Scientist[params[:id]]
   halt 404 if scientist.nil?
   devices = scientist.devices
   devices_list = []
@@ -39,14 +39,14 @@ get '/api/devices' do
 end
 
 get '/api/devices/:id' do
-  device = Device.first(id: params[:id])
+  device = Device[params[:id]]
   halt 404 if device.nil?
   response_body = JSON.pretty_generate(device.values)
   return 200, {'Content-Type' => 'application/json'}, response_body
 end
 
 get '/api/devices/:id/scientists' do
-  device = Device.first(id: params[:id])
+  device = Device[params[:id]]
   halt 404 if device.nil?
   scientists = device.scientists
   scientists_list = []
@@ -65,13 +65,13 @@ post '/api/scientists' do
 end
 
 post '/api/scientists/:id/devices' do
-  scientist = Scientist.first(id: params[:id])
+  scientist = Scientist[params[:id]]
   halt 404 if scientist.nil?
 
   data = JSON.parse(request.body.read)
   halt 422 until is_correct_data?(data, "id")
 
-  device = Device.first(id: data["id"])
+  device = Device[data["id"]]
   halt 404 if device.nil?
 
   scientist.add_device(device)
@@ -87,13 +87,13 @@ post '/api/devices' do
 end
 
 post '/api/devices/:id/scientists' do
-  device = Device.first(id: params[:id])
+  device = Device[params[:id]]
   halt 404 if device.nil?
 
   data = JSON.parse(request.body.read)
   halt 422 until is_correct_data?(data, "id")
 
-  scientist = Scientist.first(id: data["id"])
+  scientist = Scientist[data["id"]]
   halt 404 if scientist.nil?
 
   device.add_scientist(scientist)
@@ -101,7 +101,7 @@ post '/api/devices/:id/scientists' do
 end
 
 put '/api/scientists/:id' do
-  scientist = Scientist.first(id: params[:id])
+  scientist = Scientist[params[:id]]
   halt 404 if scientist.nil?
 
   data = JSON.parse(request.body.read)
@@ -113,7 +113,7 @@ put '/api/scientists/:id' do
 end
 
 put '/api/devices/:id' do
-  device = Device.first(id: params[:id])
+  device = Device[params[:id]]
   halt 404 if device.nil?
 
   data = JSON.parse(request.body.read)
@@ -124,19 +124,19 @@ put '/api/devices/:id' do
 end
 
 delete '/api/scientists/:id' do
-  scientist = Scientist.first(id: params[:id])
+  scientist = Scientist[params[:id]]
   scientist.delete if !scientist.nil?
   return 204
 end
 
 delete '/api/devices/:id' do
-  device = Device.first(id: params[:id])
+  device = Device[params[:id]]
   device.delete if !device.nil?
   return 204
 end
 
 delete '/api/scientists/:scientist_id/devices/:device_id' do
-  scientist = Scientist.first(id: params[:scientist_id])
+  scientist = Scientist[params[:scientist_id]]
   return 204 if scientist.nil?
 
   device = scientist.devices_dataset.first(id: params[:device_id])
@@ -145,7 +145,7 @@ delete '/api/scientists/:scientist_id/devices/:device_id' do
 end
 
 delete '/api/devices/:device_id/scientists/:scientist_id' do
-  device = Device.first(id: params[:device_id])
+  device = Device[params[:device_id]]
   return 204 if device.nil?
 
   scientist = device.scientists_dataset.first(id: params[:scientist_id])

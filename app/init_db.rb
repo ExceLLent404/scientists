@@ -8,8 +8,8 @@ DB.create_table(:scientists) do
   String :name, size: 40, null: false, unique: true
   Integer :madness, null: false         # measure of madness
   Integer :tries, null: false           # number of tries to destroy the galaxy
-  DateTime :timestamp, null: false, default: Time.now # date and time of
-                                                      # adding information
+  DateTime :created_at, null: false, default: Time.now # date and time of
+                                                       # adding information
   constraint(:not_negative_madness) { madness >= 0 }
   constraint(:not_negative_tries) { tries >= 0 }
 end
@@ -18,8 +18,8 @@ DB.create_table(:devices) do
   primary_key :id
   String :name, size: 40, null: false, unique: true
   Integer :power, null: false           # measure of destructive power
-  DateTime :timestamp, null: false, default: Time.now # date and time of
-                                                      # adding information
+  DateTime :created_at, null: false, default: Time.now # date and time of
+                                                       # adding information
   constraint(:not_negative_power) { power >= 0 }
 end
 

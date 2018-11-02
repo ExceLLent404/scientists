@@ -16,6 +16,7 @@ end
 get '/api/scientists/:id' do
   scientist = Scientist[params[:id]]
   halt 404 if scientist.nil?
+
   response_body = JSON.pretty_generate(scientist.values)
   return 200, {'Content-Type' => 'application/json'}, response_body
 end
@@ -23,6 +24,7 @@ end
 get '/api/scientists/:id/devices' do
   scientist = Scientist[params[:id]]
   halt 404 if scientist.nil?
+
   devices = scientist.devices
   devices_list = []
   devices.each { |d| devices_list << d.values}
@@ -41,6 +43,7 @@ end
 get '/api/devices/:id' do
   device = Device[params[:id]]
   halt 404 if device.nil?
+
   response_body = JSON.pretty_generate(device.values)
   return 200, {'Content-Type' => 'application/json'}, response_body
 end
@@ -48,6 +51,7 @@ end
 get '/api/devices/:id/scientists' do
   device = Device[params[:id]]
   halt 404 if device.nil?
+
   scientists = device.scientists
   scientists_list = []
   scientists.each { |s| scientists_list << s.values}

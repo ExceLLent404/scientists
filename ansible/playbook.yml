@@ -8,3 +8,9 @@
         path: /home/vagrant/.bashrc
         regexp: "^export ANSIBLE_CONFIG"
         line: "export ANSIBLE_CONFIG=/scientists/ansible/ansible.cfg"
+
+    - name: Follow to project directory
+      lineinfile:
+        path: /home/vagrant/.bashrc
+        regexp: "^cd /scientists"
+        line: "cd /scientists"

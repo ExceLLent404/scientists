@@ -1,0 +1,14 @@
+- name: Install required packages
+  apt: name={{ item }} state=present
+  loop:
+    - postgresql
+    - libpq-dev
+    - python-psycopg2
+    - ruby-dev
+    - ruby
+    - g++
+    - make
+    - tree
+    - git
+    - vim
+    - ntp

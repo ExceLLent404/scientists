@@ -14,3 +14,6 @@
         path: /home/vagrant/.bashrc
         regexp: "^cd /scientists"
         line: "cd /scientists"
+
+  roles:
+    - basic

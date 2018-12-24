@@ -5,6 +5,10 @@ require_relative 'models'
 require_relative 'db_connection'
 require_relative 'checking_methods'
 
+configure do
+  set :bind, '0.0.0.0'
+end
+
 get '/api/scientists' do
   scientists = Scientist.all
   scientists_list = []

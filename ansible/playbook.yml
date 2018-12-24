@@ -18,3 +18,9 @@
   roles:
     - basic
     - ntp
+
+- hosts: all
+  become: yes
+  become_user: postgres
+  roles:
+    - postgresql

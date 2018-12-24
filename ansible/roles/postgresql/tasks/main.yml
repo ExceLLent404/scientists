@@ -1,0 +1,9 @@
+- name: Create a user (role)
+  postgresql_user:
+    name: app
+    password: p@ssw0rd
+
+- name: Create a database
+  postgresql_db:
+    name: scientists
+    owner: app

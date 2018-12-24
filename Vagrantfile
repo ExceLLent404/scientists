@@ -21,4 +21,6 @@ Vagrant.configure("2") do |config|
       ansible.inventory_path = "inventory.ini"
       ansible.config_file = "ansible.cfg"
   end
+
+  config.vm.provision "shell", inline: "gem install bundler"
 end

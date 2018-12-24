@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+
+  pre_tasks:
+    - name: Force use of ansible.cfg to execute a playbook on a remote server
+      lineinfile:
+        path: /home/vagrant/.bashrc
+        regexp: "^export ANSIBLE_CONFIG"
+        line: "export ANSIBLE_CONFIG=/scientists/ansible/ansible.cfg"

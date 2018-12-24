@@ -14,4 +14,11 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 4567, host: 4567
 
   config.vm.synced_folder ".", "/scientists"
+
+  config.vm.provision "ansible_local" do |ansible|
+      ansible.provisioning_path = "/scientists/ansible"
+      ansible.playbook = "playbook.yml"
+      ansible.inventory_path = "inventory.ini"
+      ansible.config_file = "ansible.cfg"
+  end
 end

@@ -1,0 +1,5 @@
+- name: Set timezone
+  timezone: name=Europe/Moscow
+
+- name: Start and enable NTP
+  service: name=ntp state=started enabled=yes

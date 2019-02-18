@@ -12,3 +12,5 @@ gem 'rack-test'
 gem 'rspec'
 gem 'database_cleaner'
 gem 'rspec-json_matcher'
+gem 'rubocop', require: false
+gem 'rubocop-rspec', require: false

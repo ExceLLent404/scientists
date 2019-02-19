@@ -65,11 +65,11 @@ end
 
 post '/api/scientists' do
   data = JSON.parse(request.body.read)
-  halt 422 until is_correct_data?(data, "name", "madness", "tries")
+  halt 422 until is_correct_data?(data, 'name', 'madness', 'tries')
 
-  scientist = Scientist.create(name: data["name"],
-                               madness: data["madness"], tries: data["tries"])
-  return 201, {"Location" => "/api/scientists/#{scientist.id}"}, ""
+  scientist = Scientist.create(name: data['name'],
+                               madness: data['madness'], tries: data['tries'])
+  return 201, {'Location' => "/api/scientists/#{scientist.id}"}, ''
 end
 
 post '/api/scientists/:id/devices' do
@@ -77,9 +77,9 @@ post '/api/scientists/:id/devices' do
   halt 404 if scientist.nil?
 
   data = JSON.parse(request.body.read)
-  halt 422 until is_correct_data?(data, "id")
+  halt 422 until is_correct_data?(data, 'id')
 
-  device = Device[data["id"]]
+  device = Device[data['id']]
   halt 404 if device.nil?
 
   scientist.add_device(device)
@@ -88,10 +88,10 @@ end
 
 post '/api/devices' do
   data = JSON.parse(request.body.read)
-  halt 422 until is_correct_data?(data, "name", "power")
+  halt 422 until is_correct_data?(data, 'name', 'power')
 
-  device = Device.create(name: data["name"], power: data["power"])
-  return 201, {"Location" => "/api/devices/#{device.id}"}, ""
+  device = Device.create(name: data['name'], power: data['power'])
+  return 201, {'Location' => "/api/devices/#{device.id}"}, ''
 end
 
 post '/api/devices/:id/scientists' do
@@ -99,9 +99,9 @@ post '/api/devices/:id/scientists' do
   halt 404 if device.nil?
 
   data = JSON.parse(request.body.read)
-  halt 422 until is_correct_data?(data, "id")
+  halt 422 until is_correct_data?(data, 'id')
 
-  scientist = Scientist[data["id"]]
+  scientist = Scientist[data['id']]
   halt 404 if scientist.nil?
 
   device.add_scientist(scientist)
@@ -113,10 +113,10 @@ put '/api/scientists/:id' do
   halt 404 if scientist.nil?
 
   data = JSON.parse(request.body.read)
-  halt 422 until is_correct_data?(data, "name", "madness", "tries")
+  halt 422 until is_correct_data?(data, 'name', 'madness', 'tries')
 
-  scientist.update(name: data["name"],
-    madness: data["madness"], tries: data["tries"])
+  scientist.update(name: data['name'],
+    madness: data['madness'], tries: data['tries'])
   return 204
 end
 
@@ -125,9 +125,9 @@ put '/api/devices/:id' do
   halt 404 if device.nil?
 
   data = JSON.parse(request.body.read)
-  halt 422 until is_correct_data?(data, "name", "power")
+  halt 422 until is_correct_data?(data, 'name', 'power')
 
-  device.update(name: data["name"], power: data["power"])
+  device.update(name: data['name'], power: data['power'])
   return 204
 end
 

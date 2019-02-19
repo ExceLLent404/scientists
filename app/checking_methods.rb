@@ -19,30 +19,30 @@ end
 
 def correct_type?(key, value)
   case
-  when key == "id"
+  when key == 'id'
     return value.is_a? Integer
-  when key == "name"
+  when key == 'name'
     return value.is_a? String
-  when key == "madness"
+  when key == 'madness'
     return value.is_a? Integer
-  when key == "tries"
+  when key == 'tries'
     return value.is_a? Integer
-  when key == "power"
+  when key == 'power'
     return value.is_a? Integer
   end
 end
 
 def corresponds_to_constraint?(key, value)
   case
-  when key == "id"
+  when key == 'id'
     return value > 0
-  when key == "name"
+  when key == 'name'
     return value.length > 0
-  when key == "madness"
+  when key == 'madness'
     return value >= 0
-  when key == "tries"
+  when key == 'tries'
     return value >= 0
-  when key == "power"
+  when key == 'power'
     return value >= 0
   end
 end
